@@ -1,0 +1,1 @@
+export { StringServices } from './services';

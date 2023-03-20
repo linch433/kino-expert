@@ -7,7 +7,7 @@ import { auth, firestore } from '../firebaseConfig';
 import { doc, setDoc } from '@firebase/firestore';
 
 export const authAPI = {
-  async signUpWithEmail(email, password) {
+  async signUpWithEmail(email, password, name, favorite_genre) {
     const createdUser = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -17,6 +17,8 @@ export const authAPI = {
     const userForFirestore = {
       id: createdUser.user.uid,
       email: createdUser.user.email,
+      displayName: name,
+      favorite_genre: favorite_genre,
     };
 
     await setDoc(doc(firestore, 'Users', createdUser.user.uid), {
@@ -28,6 +30,7 @@ export const authAPI = {
 
   async loginWithEmail(email, password) {
     const loggedUser = await signInWithEmailAndPassword(auth, email, password);
+    console.log(loggedUser);
     return loggedUser;
   },
 
