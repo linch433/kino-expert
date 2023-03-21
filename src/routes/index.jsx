@@ -1,6 +1,10 @@
 import MainLayout from '../layouts/MainLayout/MainLayout';
 import { Outlet } from 'react-router-dom';
 import AuthPage from '../pages/AuthPage';
+import ContentPage from '../pages/ContentPage';
+import AboutPage from '../pages/AboutPage';
+import WelcomePage from '../pages/WelcomePage';
+import FilmPage from '../pages/FilmPage';
 
 const routes = [
   {
@@ -16,15 +20,23 @@ const routes = [
         children: [
           {
             path: '',
-            element: <AuthPage />,
+            element: <WelcomePage />,
           },
           {
             path: 'content',
-            element: <div>Content</div>,
+            element: <ContentPage />,
           },
           {
-            path: 'login',
-            element: <div>Login</div>,
+            path: 'content/:id',
+            element: <FilmPage />,
+          },
+          {
+            path: 'about',
+            element: <AboutPage />,
+          },
+          {
+            path: 'auth',
+            element: <AuthPage />,
           },
         ],
       },

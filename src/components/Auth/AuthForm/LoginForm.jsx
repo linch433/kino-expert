@@ -7,20 +7,24 @@ const LoginForm = () => {
   return (
     <Formik
       initialValues={{
-        login: '',
+        email: '',
         password: '',
       }}
       validationSchema={Yup.object({
-        login: Yup.string().max(25, 'Must be 25 characters or less'),
+        email: Yup.string().email('Invalid email address'),
         password: Yup.string().min(8, 'Must be 8 characters or over'),
       })}
       onSubmit={async values => {
-        await authAPI.loginWithEmail(values.login, values.password);
+        await authAPI.loginWithEmail(values.email, values.password);
       }}
     >
       <Form className="flex flex-col">
-        <AuthField name={'login'} text={'Login'} />
-        <AuthField name={'password'} text={'Password'} />
+        <AuthField name={'email'} text={'Email'} placeholder={'Email'} />
+        <AuthField
+          name={'password'}
+          text={'Password'}
+          placeholder={'Password'}
+        />
         <AuthButton text={'Submit'} type={'submit'} />
       </Form>
     </Formik>

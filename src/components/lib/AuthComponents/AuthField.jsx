@@ -1,6 +1,6 @@
 import { Field, ErrorMessage } from 'formik';
 
-export const AuthField = ({ name, text, type = 'input', options }) => {
+export const AuthField = ({ name, text, type = 'input', options, placeholder }) => {
   return (
     <>
       <label htmlFor={name} className="text-lg pb-2 text-int mt-5">
@@ -9,6 +9,7 @@ export const AuthField = ({ name, text, type = 'input', options }) => {
       {type === 'select' ? (
         <Field
           name={name}
+          placeholder={placeholder}
           as={type}
           className="shadow appearance-none border caret-int-black text-int-black rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
         >
@@ -21,6 +22,7 @@ export const AuthField = ({ name, text, type = 'input', options }) => {
       ) : (
         <Field
           name={name}
+          placeholder={placeholder}
           as={type}
           className="shadow appearance-none border caret-int-black text-int-black rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
         ></Field>
