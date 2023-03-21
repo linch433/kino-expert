@@ -11,8 +11,10 @@ const LoginForm = () => {
         password: '',
       }}
       validationSchema={Yup.object({
-        email: Yup.string().email('Invalid email address'),
-        password: Yup.string().min(8, 'Must be 8 characters or over'),
+        email: Yup.string().email('Invalid email address').required('Required'),
+        password: Yup.string()
+          .min(8, 'Must be 8 characters or over')
+          .required('Required'),
       })}
       onSubmit={async values => {
         await authAPI.loginWithEmail(values.email, values.password);

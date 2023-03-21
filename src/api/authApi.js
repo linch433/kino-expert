@@ -30,7 +30,6 @@ export const authAPI = {
 
   async loginWithEmail(email, password) {
     const loggedUser = await signInWithEmailAndPassword(auth, email, password);
-    console.log(loggedUser);
     return loggedUser;
   },
 
