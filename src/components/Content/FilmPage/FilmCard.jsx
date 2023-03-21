@@ -15,14 +15,14 @@ const FilmCard = ({ currentFilm }) => {
   } = currentFilm;
   return (
     <div className="relative py-10 mx-5 flex flex-wrap items-center bg-int-gray-secondary text-int-white-main rounded-lg mb-5">
-      <div className="w-full md:w-[30%] ml-auto mr-auto px-4">
+      <div className="w-full md:w-[45%] lg:w-[38%] ml-auto mr-auto px-2">
         <img
           src={image_url}
           alt="poster"
           className="max-w-full rounded-lg shadow-lg"
         />
       </div>
-      <div className="w-full md:w-5/12 ml-auto mr-auto px-4 sm:mt-2">
+      <div className="w-full md:w-6/12 ml-auto mr-auto px-2 sm:mt-2">
         <div className="md:pr-12">
           <div className="pt-3 text-3xl font-semibold">{name}</div>
           <div className="mt-4 text-lg leading-relaxed">{description}</div>
@@ -48,11 +48,21 @@ const FilmCard = ({ currentFilm }) => {
           </div>
           <Link
             to={trailer_url}
-            className="mt-2 text-lg flex flex-col leading-relaxed justify-center items-center rounded-lg py-3 bg-int-gray-main hover:bg-input font-semibold"
+            className="mt-2 text-lg flex flex-col leading-relaxed justify-center items-center rounded-lg py-3 bg-int-gray-main hover:bg-input font-semibold lg:hidden"
             target="_blank"
           >
             Watch trailer
           </Link>
+          <div className="mt-2 items-center hidden justify-center w-full lg:flex lg:h-[25rem]">
+            <iframe
+              src={`https://www.youtube.com/embed/${StringServices.getEmbedString(
+                trailer_url
+              )}`}
+              className="w-full h-full"
+              title="Trailer"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            ></iframe>
+          </div>
         </div>
       </div>
     </div>
