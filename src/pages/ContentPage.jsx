@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../firebaseConfig';
 import { PagePreLoader } from '../styles/PreLoader/PreLoader';
@@ -29,8 +29,8 @@ const ContentPage = () => {
     fetchFilms();
   }, []);
 
-  const filterFilms = () => {
-    const filteredFilms = films?.filter(film => {
+  const filteredFilms = useMemo(() => {
+    return films?.filter(film => {
       if (filterOption === 'name') {
         return film.name.toLowerCase().includes(searchQuery.toLowerCase());
       } else if (filterOption === 'genre') {
@@ -38,10 +38,7 @@ const ContentPage = () => {
       }
       return true;
     });
-    return filteredFilms;
-  };
-
-  const filteredFilms = filterFilms();
+  }, [searchQuery, films, filterOption]);
 
   if (isLoading) return <PagePreLoader />;
 
@@ -55,14 +52,16 @@ const ContentPage = () => {
           onChange={e => setSearchQuery(e.target.value)}
         />
         <div className="flex justify-center mb-6">
-          <ContentSearchRadioButton
-            type="radio"
-            value="name"
-            checked={filterOption === 'name'}
-            onChange={() => setFilterOption('name')}
-          >
-            Name
-          </ContentSearchRadioButton>
+          <div className="mr-4">
+            <ContentSearchRadioButton
+              type="radio"
+              value="name"
+              checked={filterOption === 'name'}
+              onChange={() => setFilterOption('name')}
+            >
+              Name
+            </ContentSearchRadioButton>
+          </div>
           <ContentSearchRadioButton
             type="radio"
             value="genre"

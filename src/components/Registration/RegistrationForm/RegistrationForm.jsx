@@ -36,7 +36,6 @@ const RegistrationForm = () => {
           values.name,
           values.favorite_genre
         );
-        console.log(values);
       }}
     >
       <Form className="flex flex-col">

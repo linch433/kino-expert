@@ -5,7 +5,6 @@ import FilmReviews from '../components/Content/FilmPage/FilmReviews';
 const FilmPage = () => {
   const locationState = useLocation().state;
   const { currentFilm } = locationState;
-  console.log(currentFilm.reviews);
 
   return (
     <>
