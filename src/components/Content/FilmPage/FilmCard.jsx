@@ -1,5 +1,7 @@
-import { StringServices } from '../../../app/features/services/StringServices';
+import { StringServices } from '../../../app/features';
 import { Link } from 'react-router-dom';
+import FilmReviewForm from './FilmReviewForm';
+import { useState } from 'react';
 
 const FilmCard = ({ currentFilm }) => {
   const {
@@ -16,6 +18,25 @@ const FilmCard = ({ currentFilm }) => {
   const embedUrl = `https://www.youtube.com/embed/${StringServices.getEmbedString(
     trailer_url
   )}`;
+  const videoDetails = [
+    { label: 'Duration:', value: `${duration} minutes` },
+    { label: 'Published at:', value: `${published_at} y.` },
+    { label: 'Rating:', value: rating },
+    { label: 'Allowed age:', value: allowed_age },
+    { label: 'Genre:', value: StringServices.getCapitalizeWord(genre) },
+  ];
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModalOpen = () => {
+    setIsModalOpen(true);
+    document.body.classList.add('overflow-hidden');
+  }
+
+  const toggleModalClose = () => {
+    setIsModalOpen(false);
+    document.body.classList.remove('overflow-hidden');
+  }
 
   return (
     <div className="relative py-10 mx-5 flex flex-wrap items-center bg-int-gray-secondary text-int-white-main rounded-lg mb-5">
@@ -30,26 +51,22 @@ const FilmCard = ({ currentFilm }) => {
         <div className="md:pr-12">
           <div className="pt-3 text-3xl font-semibold">{name}</div>
           <div className="mt-4 text-lg leading-relaxed">{description}</div>
-          <div className="mt-2 text-lg leading-relaxed">
-            <span className="font-semibold">Duration: </span>
-            {duration} minutes
+
+          {videoDetails.map((detail, index) => (
+            <div key={index} className="mt-2 text-lg leading-relaxed">
+              <span className="font-semibold">{detail.label} </span>
+              {detail.value}
+            </div>
+          ))}
+
+          <div
+            className="mt-2 text-lg flex flex-col leading-relaxed justify-center items-center rounded-lg py-3 bg-int-gray-main hover:bg-input font-semibold cursor-pointer"
+            onClick={toggleModalOpen}
+          >
+            Add review
           </div>
-          <div className="mt-2 text-lg leading-relaxed">
-            <span className="font-semibold">Published at: </span>
-            {published_at} y.
-          </div>
-          <div className="mt-2 text-lg leading-relaxed">
-            <span className="font-semibold">Rating: </span>
-            {rating}
-          </div>
-          <div className="mt-2 text-lg leading-relaxed">
-            <span className="font-semibold">Allowed age: </span>
-            {allowed_age}
-          </div>
-          <div className="mt-2 text-lg leading-relaxed">
-            <span className="font-semibold">Genre: </span>
-            {StringServices.getCapitalizeWord(genre)}
-          </div>
+
+          {isModalOpen && <FilmReviewForm toggleModal={toggleModalClose}/>}
           <Link
             to={trailer_url}
             className="mt-2 text-lg flex flex-col leading-relaxed justify-center items-center rounded-lg py-3 bg-int-gray-main hover:bg-input font-semibold lg:hidden"
