@@ -6,13 +6,16 @@ import { BrowserRouter } from 'react-router-dom';
 import ScrollToTop from './hoc/ScrollToTop';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import AuthProvider from './hoc/AuthProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Provider store={store}>
       <ScrollToTop />
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </Provider>
-  </BrowserRouter>,
+  </BrowserRouter>
 );

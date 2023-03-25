@@ -7,7 +7,7 @@ import { useAuth } from '../../../store/hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
-  const { setAuth, authData } = useAuth();
+  const { setAuth } = useAuth();
   const navigate = useNavigate();
 
   return (
@@ -22,14 +22,14 @@ const LoginForm = () => {
           .min(8, 'Must be 8 characters or over')
           .required('Required'),
       })}
-      onSubmit={async values => {
-        authAPI.loginWithEmail(values.email, values.password).then(res => {
+      onSubmit={async (values) => {
+        authAPI.loginWithEmail(values.email, values.password).then((res) => {
           setAuth(true);
           navigate('/content');
         });
       }}
     >
-      <Form className='flex flex-col'>
+      <Form className="flex flex-col">
         <CustomField name={'email'} text={'Email'} placeholder={'Email'} />
         <CustomField
           name={'password'}

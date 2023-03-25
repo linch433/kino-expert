@@ -3,13 +3,16 @@ import { setAuth } from '../slices/authSlice';
 
 export const useAuth = () => {
   const dispatch = useDispatch();
+
+  const _isAuth = useSelector((state) => state.auth.isAuth);
+
   const _setAuth = (status) => {
     dispatch(setAuth(status));
-  }
+  };
 
-  const _authData = useSelector((state) => {
+  const _profileData = useSelector((state) => {
     return state.auth;
-  })
+  });
 
-  return { setAuth: _setAuth, authData: _authData }
-}
+  return { isAuth: _isAuth, setAuth: _setAuth, profileData: _profileData };
+};
