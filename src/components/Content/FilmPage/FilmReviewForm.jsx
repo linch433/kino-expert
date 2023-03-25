@@ -14,7 +14,6 @@ const FilmReviewForm = (props) => {
           filmRating: 0,
         }}
         onSubmit={values => {
-          console.log(values);
           toggleModal();
         }}
       >

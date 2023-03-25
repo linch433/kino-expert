@@ -2,12 +2,25 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MenuLink from '../../styles/MenuLink';
 import { CgMenu } from 'react-icons/cg';
+import { useAuth } from '../../store/hooks/useAuth';
+import { authAPI } from '../../api/authApi';
+
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isAuth = JSON.parse(localStorage.getItem('user'));
+  // const { setAuth, authData } = useAuth();
 
+  console.log('Locale storage content: ', JSON.parse(localStorage.getItem('user')));
+  
   const toggleMenu = () => {
     setIsModalOpen(!isModalOpen);
+  };
+
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  const userLogout = () => {
+    authAPI.logout().then(() => console.log('Locale storage: ', JSON.parse(localStorage.getItem('user'))));
   };
 
   return (
@@ -17,6 +30,7 @@ const Header = () => {
         <div className='hidden md:flex items-center'>
           <MenuLink linkPath='/content' text='Content' />
           <MenuLink linkPath='/about' text='About' />
+          <div onClick={userLogout} className='mr-[36px]'>Sign Out</div>
           <MenuLink linkPath='/auth' text='Sign In' />
         </div>
         <div className='flex flex-col items-center md:hidden'>
