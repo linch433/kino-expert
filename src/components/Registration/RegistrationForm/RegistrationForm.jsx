@@ -1,5 +1,6 @@
 import { Formik, Form } from 'formik';
-import { AuthButton, AuthField } from '../../lib/AuthComponents';
+import { AuthButton } from '../../lib/AuthComponents';
+import { CustomField } from '../../../styles/CustomField';
 import * as Yup from 'yup';
 import { authAPI } from '../../../api/authApi';
 
@@ -39,22 +40,22 @@ const RegistrationForm = () => {
       }}
     >
       <Form className="flex flex-col">
-        <AuthField
+        <CustomField
           name={'email'}
           text={'Email'}
           placeholder={'Write your email'}
         />
-        <AuthField
+        <CustomField
           name={'password'}
           text={'Password'}
           placeholder={'Write your password'}
         />
-        <AuthField
+        <CustomField
           name={'name'}
           text={'Your name'}
           placeholder={'Write your name'}
         />
-        <AuthField
+        <CustomField
           name={'favorite_genre'}
           text={'Favorite genre'}
           type="select"

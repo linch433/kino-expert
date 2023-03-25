@@ -1,9 +1,15 @@
 import { Formik, Form } from 'formik';
-import { AuthButton, AuthField } from '../../lib/AuthComponents';
+import { AuthButton } from '../../lib/AuthComponents';
+import { CustomField } from '../../../styles/CustomField';
 import * as Yup from 'yup';
 import { authAPI } from '../../../api/authApi';
+import { useAuth } from '../../../store/hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
+
   return (
     <Formik
       initialValues={{
@@ -16,13 +22,16 @@ const LoginForm = () => {
           .min(8, 'Must be 8 characters or over')
           .required('Required'),
       })}
-      onSubmit={async values => {
-        await authAPI.loginWithEmail(values.email, values.password);
+      onSubmit={async (values) => {
+        authAPI.loginWithEmail(values.email, values.password).then((res) => {
+          setAuth(true);
+          navigate('/content');
+        });
       }}
     >
       <Form className="flex flex-col">
-        <AuthField name={'email'} text={'Email'} placeholder={'Email'} />
-        <AuthField
+        <CustomField name={'email'} text={'Email'} placeholder={'Email'} />
+        <CustomField
           name={'password'}
           text={'Password'}
           placeholder={'Password'}

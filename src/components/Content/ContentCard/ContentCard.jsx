@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { StringServices } from '../../../app/features/services/StringServices';
-import ReviewCardButton from '../../../styles/ReviewCardButton/ReviewCardButton';
+import ReviewCardButton from '../../../styles/ReviewCardButton';
 
 const ContentCard = ({ film }) => {
   const { image_url, name, description, genre, rating, allowed_age } = film;

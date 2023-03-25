@@ -3,9 +3,10 @@ import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../firebaseConfig';
 import { PagePreLoader } from '../styles/PreLoader/PreLoader';
 
-import ContentSearchRadioButton from '../styles/ContentSearchRadioButton/ContentSearchRadioButton';
-import ContentSearchBar from '../styles/ContentSearchBar/ContentSearchBar';
+import ContentSearchRadioButton from '../styles/ContentSearchRadioButton';
+import ContentSearchBar from '../styles/ContentSearchBar';
 import ContentCard from '../components/Content/ContentCard/ContentCard';
+import { useAuth } from '../store/hooks/useAuth';
 
 const ContentPage = () => {
   const [films, setFilms] = useState();
@@ -44,18 +45,18 @@ const ContentPage = () => {
 
   return (
     <>
-      <div className="flex items-center flex-col justify-center gap-1 md:flex-row md:gap-3">
+      <div className='flex items-center flex-col justify-center gap-1 md:flex-row md:gap-3'>
         <ContentSearchBar
-          type="search"
-          placeholder="Search"
+          type='search'
+          placeholder='Search'
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
         />
-        <div className="flex justify-center mb-6">
-          <div className="mr-4">
+        <div className='flex justify-center mb-6'>
+          <div className='mr-4'>
             <ContentSearchRadioButton
-              type="radio"
-              value="name"
+              type='radio'
+              value='name'
               checked={filterOption === 'name'}
               onChange={() => setFilterOption('name')}
             >
@@ -63,11 +64,11 @@ const ContentPage = () => {
             </ContentSearchRadioButton>
           </div>
           <ContentSearchRadioButton
-            type="radio"
-            value="genre"
+            type='radio'
+            value='genre'
             checked={filterOption === 'genre'}
             onChange={() => setFilterOption('genre')}
-            className="ml-3"
+            className='ml-3'
           >
             Genre
           </ContentSearchRadioButton>
