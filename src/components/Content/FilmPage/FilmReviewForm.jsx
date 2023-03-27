@@ -20,7 +20,7 @@ const FilmReviewForm = (props) => {
         }}
         onSubmit={values => {
           const newReview = {
-            user_name: 'test update',
+            user_name: 'admin',
             film_review: values.filmReviewField,
             rating: values.filmRating,
           };
