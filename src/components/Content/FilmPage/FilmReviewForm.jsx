@@ -1,10 +1,15 @@
-import React from 'react';
 import { Form, Formik } from 'formik';
 import { CustomField } from '../../../styles/CustomField';
+import { useAuth } from '../../../store/hooks/useAuth';
+import { useLocation } from 'react-router-dom';
+import { doc, updateDoc } from 'firebase/firestore';
+import { firestore } from '../../../firebaseConfig';
 import StarRating from './StarRating';
 
 const FilmReviewForm = (props) => {
+  const location = useLocation().state.currentFilm;
   const { toggleModal } = props;
+  const { isAuth, profileData } = useAuth();
 
   return (
     <div className='fixed z-10 inset-0 overflow-hidden backdrop-brightness-[0.4]'>
@@ -14,7 +19,22 @@ const FilmReviewForm = (props) => {
           filmRating: 0,
         }}
         onSubmit={values => {
-          toggleModal();
+          const newReview = {
+            user_name: 'test update',
+            film_review: values.filmReviewField,
+            rating: values.filmRating,
+          };
+          const docRef = doc(firestore, 'Films', location.id);
+
+          updateDoc(docRef, {
+            reviews: [...location.reviews, newReview],
+          }).then(() => {
+            console.log('New review added successfully');
+            toggleModal();
+            window.location.reload();
+          }).catch((error) => {
+            console.error('Error adding new review: ', error);
+          });
         }}
       >
         <div className='flex justify-center items-center min-h-screen'>
