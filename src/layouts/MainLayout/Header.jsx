@@ -4,6 +4,7 @@ import MenuLink from '../../styles/MenuLink';
 import { CgMenu } from 'react-icons/cg';
 import { authAPI } from '../../api/authApi';
 import { useAuth } from '../../store/hooks/useAuth';
+import { ReactComponent as ReactLogo } from '../../assets/logo.svg';
 import LogOutButton from '../../styles/LogOutButton';
 
 const Header = () => {
@@ -23,10 +24,13 @@ const Header = () => {
 
   return (
     <>
-      <div className='flex h-[60px] items-center justify-between bg-int-gray-main text-int-white-main px-10 text-lg'>
-        <Link to={'/'}>Logo</Link>
+      <div
+        className='flex h-[60px] items-center justify-between bg-int-gray-main text-int-white-main px-5 md:px-10 text-lg'>
+        <Link to={'/'}>
+          <ReactLogo className='h-8 w-auto' />
+        </Link>
         <div className='hidden md:flex items-center'>
-          <MenuLink linkPath='/content' text='Content' />
+          <MenuLink linkPath='/content' text='Films' />
           <MenuLink linkPath='/about' text='About' />
           {isAuth ? (
             <LogOutButton onClick={logoutUser} className='cursor-pointer'>
@@ -47,9 +51,15 @@ const Header = () => {
 
       {isModalOpen && (
         <div className='flex flex-col items-end bg-int-gray-main text-int-white-main text-lg py-3 z-1 gap-3 md:hidden'>
-          <MenuLink linkPath='/content' text='Content' />
+          <MenuLink linkPath='/content' text='Films' />
           <MenuLink linkPath='/about' text='About' />
-          <MenuLink linkPath='/auth' text='Sign In' />
+          {isAuth ? (
+            <LogOutButton onClick={logoutUser} className='cursor-pointer'>
+              Sign Out
+            </LogOutButton>
+          ) : (
+            <MenuLink linkPath='/auth' text='Sign In' />
+          )}
         </div>
       )}
     </>
