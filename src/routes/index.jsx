@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 import AuthPage from '../pages/AuthPage';
 import ContentPage from '../pages/ContentPage';
 import AboutPage from '../pages/AboutPage';
-import WelcomePage from '../pages/WelcomePage';
 import FilmPage from '../pages/FilmPage';
 
 const routes = [
@@ -19,15 +18,11 @@ const routes = [
         ),
         children: [
           {
-            path: '',
-            element: <WelcomePage />,
-          },
-          {
-            path: 'content',
+            path: 'films',
             element: <ContentPage />,
           },
           {
-            path: 'content/:id',
+            path: 'films/:id',
             element: <FilmPage />,
           },
           {

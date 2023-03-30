@@ -25,11 +25,11 @@ const LoginForm = () => {
       onSubmit={async (values) => {
         authAPI.loginWithEmail(values.email, values.password).then((res) => {
           setAuth(true);
-          navigate('/content');
+          navigate('/films');
         });
       }}
     >
-      <Form className="flex flex-col">
+      <Form className='flex flex-col'>
         <CustomField name={'email'} text={'Email'} placeholder={'Email'} />
         <CustomField
           name={'password'}
