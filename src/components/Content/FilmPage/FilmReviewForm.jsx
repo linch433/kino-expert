@@ -1,15 +1,30 @@
+import { useState, useEffect } from 'react';
 import { Form, Formik } from 'formik';
 import { CustomField } from '../../../styles/CustomField';
-import { useAuth } from '../../../store/hooks/useAuth';
 import { useLocation } from 'react-router-dom';
-import { doc, updateDoc } from 'firebase/firestore';
-import { firestore } from '../../../firebaseConfig';
+import { doc, updateDoc, getDoc } from 'firebase/firestore';
+import { auth, firestore } from '../../../firebaseConfig';
+import { onAuthStateChanged } from '@firebase/auth';
 import StarRating from './StarRating';
 
 const FilmReviewForm = (props) => {
-  const location = useLocation().state.currentFilm;
   const { toggleModal } = props;
-  const { isAuth, profileData } = useAuth();
+  const [userState, setUserState] = useState(null);
+  const location = useLocation().state.currentFilm;
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userDocRef = doc(firestore, 'Users', user.uid);
+        const userDocSnapshot = await getDoc(userDocRef);
+        setUserState(userDocSnapshot.data());
+      } else {
+        setUserState(null);
+      }
+    });
+
+    return unsubscribe;
+  }, []);
 
   return (
     <div className='fixed z-10 inset-0 overflow-hidden backdrop-brightness-[0.4]'>
@@ -20,7 +35,7 @@ const FilmReviewForm = (props) => {
         }}
         onSubmit={values => {
           const newReview = {
-            user_name: 'admin',
+            user_name: userState?.displayName,
             film_review: values.filmReviewField,
             rating: values.filmRating,
           };
@@ -31,7 +46,6 @@ const FilmReviewForm = (props) => {
           }).then(() => {
             console.log('New review added successfully');
             toggleModal();
-            window.location.reload();
           }).catch((error) => {
             console.error('Error adding new review: ', error);
           });
