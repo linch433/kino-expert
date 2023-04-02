@@ -25,7 +25,7 @@ const LoginForm = () => {
       onSubmit={async (values) => {
         authAPI.loginWithEmail(values.email, values.password).then((res) => {
           setAuth(true);
-          navigate('/films');
+          navigate('/');
         });
       }}
     >

@@ -6,12 +6,12 @@ const ContentCard = ({ film }) => {
   const { image_url, name, description, genre, rating, allowed_age } = film;
   const navigate = useNavigate();
   const navigateCard = () => {
-    navigate(`/films/${film.id}`, { state: { currentFilm: film } });
+    navigate(`/${film.id}`, { state: { currentFilm: film } });
   };
 
   return (
     <div
-      className='flex flex-col max-w-[20rem] h-[38rem] items-start rounded-lg overflow-hidden shadow-lg bg-int-gray-secondary text-int-white-main mb-10'>
+      className='flex flex-col max-w-[19.5rem] h-[38rem] items-start rounded-lg overflow-hidden shadow-lg bg-int-gray-secondary text-int-white-main mb-10'>
       <img
         src={image_url}
         alt='poster'

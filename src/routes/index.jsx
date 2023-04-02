@@ -8,32 +8,27 @@ import FilmPage from '../pages/FilmPage';
 const routes = [
   {
     path: '/',
+    element: (
+      <MainLayout>
+        <Outlet />
+      </MainLayout>
+    ),
     children: [
       {
         path: '',
-        element: (
-          <MainLayout>
-            <Outlet />
-          </MainLayout>
-        ),
-        children: [
-          {
-            path: 'films',
-            element: <ContentPage />,
-          },
-          {
-            path: 'films/:id',
-            element: <FilmPage />,
-          },
-          {
-            path: 'about',
-            element: <AboutPage />,
-          },
-          {
-            path: 'auth',
-            element: <AuthPage />,
-          },
-        ],
+        element: <ContentPage />,
+      },
+      {
+        path: '/:id',
+        element: <FilmPage />,
+      },
+      {
+        path: 'about',
+        element: <AboutPage />,
+      },
+      {
+        path: 'auth',
+        element: <AuthPage />,
       },
     ],
   },

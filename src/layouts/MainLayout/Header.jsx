@@ -26,11 +26,11 @@ const Header = () => {
     <>
       <div
         className='flex h-[60px] items-center justify-between bg-int-gray-main text-int-white-main px-5 md:px-10 text-lg'>
-        <Link to={'/films'}>
+        <Link to={'/'}>
           <ReactLogo className='h-8 w-auto' />
         </Link>
         <div className='hidden md:flex items-center'>
-          <MenuLink linkPath='/films' text='Films' />
+          <MenuLink linkPath='/' text='Films' />
           <MenuLink linkPath='/about' text='About' />
           {isAuth ? (
             <LogOutButton onClick={logoutUser} className='cursor-pointer'>
@@ -50,8 +50,9 @@ const Header = () => {
       </div>
 
       {isModalOpen && (
-        <div className='flex flex-col items-end bg-int-gray-main text-int-white-main text-lg py-3 z-1 gap-3 md:hidden'>
-          <MenuLink linkPath='/films' text='Films' />
+        <div
+          className='flex flex-col px-5 bg-int-gray-main text-int-white-main text-lg py-3 z-1 gap-3 border-2 md:hidden'>
+          <MenuLink linkPath='/' text='Films' />
           <MenuLink linkPath='/about' text='About' />
           {isAuth ? (
             <LogOutButton onClick={logoutUser} className='cursor-pointer'>
