@@ -3,20 +3,11 @@ import { colorGenerator } from '../../app/features';
 
 const UserAvatar = ({ userName }) => {
   const userNameFirstLetter = userName.charAt(0).toUpperCase();
-  const bgColor = useMemo(() => colorGenerator(userName), [userName]);
-
-  const styleObj = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '3rem',
-    height: '3rem',
-    borderRadius: '1.5rem',
-    backgroundColor: `#${bgColor}`,
-  };
+  const bgColor = useMemo(() => `#${colorGenerator(userName)}`, [userName]);
 
   return (
-    <div style={styleObj}>{userNameFirstLetter}</div>
+    <div className='flex justify-center items-center w-12 h-12 rounded-3xl'
+         style={{ backgroundColor: `${bgColor}` }}>{userNameFirstLetter}</div>
   );
 };
 
