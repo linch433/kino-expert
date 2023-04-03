@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Formik, Form } from 'formik';
 import { AuthButton } from '../../lib/AuthComponents';
 import { CustomField } from '../../../styles/CustomField';
@@ -7,6 +8,7 @@ import { useAuth } from '../../../store/hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+  const [isError, setIsError] = useState(false);
   const { setAuth } = useAuth();
   const navigate = useNavigate();
 
@@ -23,19 +25,28 @@ const LoginForm = () => {
           .required('Required'),
       })}
       onSubmit={async (values) => {
-        authAPI.loginWithEmail(values.email, values.password).then((res) => {
-          setAuth(true);
-          navigate('/');
-        });
+        setIsError(false);
+        authAPI
+          .loginWithEmail(values.email, values.password)
+          .then((res) => {
+            setAuth(true);
+            navigate('/');
+          })
+          .catch((e) => setIsError(true));
       }}
     >
-      <Form className='flex flex-col'>
+      <Form className="flex flex-col">
         <CustomField name={'email'} text={'Email'} placeholder={'Email'} />
         <CustomField
           name={'password'}
           text={'Password'}
           placeholder={'Password'}
         />
+        {isError && (
+          <div className="flex items-center justify-center text-error pt-4">
+            Login or password are incorrect
+          </div>
+        )}
         <AuthButton text={'Submit'} type={'submit'} />
       </Form>
     </Formik>
