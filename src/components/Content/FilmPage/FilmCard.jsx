@@ -2,6 +2,7 @@ import { StringServices } from '../../../app/features';
 import { Link } from 'react-router-dom';
 import FilmReviewForm from './FilmReviewForm';
 import { useState } from 'react';
+import { useAuth } from '../../../store/hooks/useAuth';
 
 const FilmCard = ({ currentFilm }) => {
   const {
@@ -27,16 +28,17 @@ const FilmCard = ({ currentFilm }) => {
   ];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isAuth } = useAuth();
 
   const toggleModalOpen = () => {
     setIsModalOpen(true);
     document.body.classList.add('overflow-hidden');
-  }
+  };
 
   const toggleModalClose = () => {
     setIsModalOpen(false);
     document.body.classList.remove('overflow-hidden');
-  }
+  };
 
   return (
     <div className="relative py-10 mx-5 flex flex-wrap items-center bg-int-gray-secondary text-int-white-main rounded-lg mb-5">
@@ -60,13 +62,14 @@ const FilmCard = ({ currentFilm }) => {
           ))}
 
           <div
-            className="mt-2 text-lg flex flex-col leading-relaxed justify-center items-center rounded-lg py-3 bg-int-gray-main hover:bg-input font-semibold cursor-pointer"
+            className={`mt-2 text-lg flex flex-col leading-relaxed justify-center items-center rounded-lg py-3 bg-int-gray-main hover:bg-input font-semibold cursor-pointer
+            ${isAuth ? '' : 'hidden'}`}
             onClick={toggleModalOpen}
           >
             Add review
           </div>
 
-          {isModalOpen && <FilmReviewForm toggleModal={toggleModalClose}/>}
+          {isModalOpen && <FilmReviewForm toggleModal={toggleModalClose} />}
           <Link
             to={trailer_url}
             className="mt-2 text-lg flex flex-col leading-relaxed justify-center items-center rounded-lg py-3 bg-int-gray-main hover:bg-input font-semibold lg:hidden"

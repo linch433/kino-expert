@@ -6,7 +6,6 @@ import { PagePreLoader } from '../styles/PreLoader/PreLoader';
 import ContentSearchRadioButton from '../styles/ContentSearchRadioButton';
 import ContentSearchBar from '../styles/ContentSearchBar';
 import ContentCard from '../components/Content/ContentCard/ContentCard';
-import { useAuth } from '../store/hooks/useAuth';
 
 const ContentPage = () => {
   const [films, setFilms] = useState();

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setAuth } from '../slices/authSlice';
+import { setAuth, setProfileData } from '../slices/authSlice';
 
 export const useAuth = () => {
   const dispatch = useDispatch();
@@ -10,9 +10,16 @@ export const useAuth = () => {
     dispatch(setAuth(status));
   };
 
-  const _profileData = useSelector((state) => {
-    return state.auth;
-  });
+  const _profileData = useSelector((state) => state.auth.profileData);
 
-  return { isAuth: _isAuth, setAuth: _setAuth, profileData: _profileData };
+  const _setProfileData = (status) => {
+    dispatch(setProfileData(status));
+  };
+
+  return {
+    isAuth: _isAuth,
+    setAuth: _setAuth,
+    profileData: _profileData,
+    setProfileData: _setProfileData,
+  };
 };
