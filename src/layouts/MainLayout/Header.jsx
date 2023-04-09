@@ -9,7 +9,7 @@ import LogOutButton from '../../styles/LogOutButton';
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { isAuth, setAuth } = useAuth();
+  const { isAuth, setAuth, profileData } = useAuth();
   const navigate = useNavigate();
 
   const toggleMenu = () => {
@@ -30,6 +30,11 @@ const Header = () => {
           <ReactLogo className='h-8 w-auto' />
         </Link>
         <div className='hidden md:flex items-center'>
+          {profileData?.displayName === 'admin' ? (
+            <MenuLink linkPath='/adminPanel' text='Admin Panel' />
+          ) : (
+            <></>
+          )}
           <MenuLink linkPath='/' text='Films' />
           <MenuLink linkPath='/about' text='About' />
           {isAuth ? (
@@ -52,6 +57,9 @@ const Header = () => {
       {isModalOpen && (
         <div
           className='flex flex-col px-5 bg-int-gray-main text-int-white-main text-lg py-3 z-1 gap-3 border-2 md:hidden'>
+          {profileData?.displayName === 'admin' && (
+            <MenuLink linkPath='/adminPanel' text='Admin Panel' />
+          )}
           <MenuLink linkPath='/' text='Films' />
           <MenuLink linkPath='/about' text='About' />
           {isAuth ? (
