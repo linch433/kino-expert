@@ -1,9 +1,10 @@
-import MainLayout from '../layouts/MainLayout/MainLayout';
 import { Outlet } from 'react-router-dom';
+import MainLayout from '../layouts/MainLayout/MainLayout';
 import AuthPage from '../pages/AuthPage';
 import ContentPage from '../pages/ContentPage';
 import AboutPage from '../pages/AboutPage';
 import FilmPage from '../pages/FilmPage';
+import AdminPanelPage from '../pages/AdminPanelPage';
 
 const routes = [
   {
@@ -29,6 +30,10 @@ const routes = [
       {
         path: 'auth',
         element: <AuthPage />,
+      },
+      {
+        path: 'adminPanel',
+        element: <AdminPanelPage />,
       },
     ],
   },

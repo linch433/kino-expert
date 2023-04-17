@@ -11,6 +11,9 @@ const RegistrationForm = () => {
     { label: 'Thriller', value: 'thriller' },
     { label: 'Fantasy', value: 'fantasy' },
     { label: 'Action', value: 'action' },
+    { label: 'Drama', value: 'drama' },
+    { label: 'Animation', value: 'animation' },
+    { label: 'Biography', value: 'biography' },
   ];
 
   return (
@@ -35,11 +38,11 @@ const RegistrationForm = () => {
           values.email,
           values.password,
           values.name,
-          values.favorite_genre
+          values.favorite_genre,
         );
       }}
     >
-      <Form className="flex flex-col">
+      <Form className='flex flex-col'>
         <CustomField
           name={'email'}
           text={'Email'}
@@ -58,7 +61,7 @@ const RegistrationForm = () => {
         <CustomField
           name={'favorite_genre'}
           text={'Favorite genre'}
-          type="select"
+          type='select'
           options={genresOptions}
         />
         <AuthButton text={'Submit'} type={'submit'} />
