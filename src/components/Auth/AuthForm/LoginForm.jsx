@@ -35,7 +35,7 @@ const LoginForm = () => {
           .catch((e) => setIsError(true));
       }}
     >
-      <Form className="flex flex-col">
+      <Form className='flex flex-col'>
         <CustomField name={'email'} text={'Email'} placeholder={'Email'} />
         <CustomField
           name={'password'}
@@ -43,7 +43,7 @@ const LoginForm = () => {
           placeholder={'Password'}
         />
         {isError && (
-          <div className="flex items-center justify-center text-error pt-4">
+          <div className='flex items-center justify-center text-error pt-4'>
             Login or password are incorrect
           </div>
         )}

@@ -21,19 +21,19 @@ const ContentCard = ({ film }) => {
         <p className='text-lg font-semibold overflow-hidden flex items-start h-[3.2rem]'>
           {name}
         </p>
-        <p className='text-sm overflow-hidden py-2 h-[12rem]'>{description}</p>
+        <p className='text-sm overflow-hidden pt-2 h-[12rem]'>{description}</p>
       </div>
       <div className='px-6 pb-1 overflow-hidden'>
         <span
-          className='inline-block bg-int-white-secondary rounded-full px-3 py-1 text-sm font-semibold text-int-gray-main mr-2 mb-1'>
+          className='inline-block bg-int-white-secondary rounded-full px-[9px] py-1 text-sm font-semibold text-int-gray-main mr-2 mb-1'>
           {StringServices.getCapitalizeWord(genre)}
         </span>
         <span
-          className='inline-block bg-int-white-secondary rounded-full px-3 py-1 text-sm font-semibold text-int-gray-main mr-2 mb-1'>
+          className='inline-block bg-int-white-secondary rounded-full px-[9px] py-1 text-sm font-semibold text-int-gray-main mr-2 mb-1'>
           Rating: {rating}
         </span>
         <span
-          className='inline-block bg-int-white-secondary rounded-full px-3 py-1 text-sm font-semibold text-int-gray-main mr-2 mb-1'>
+          className='inline-block bg-int-white-secondary rounded-full px-[9px] py-1 text-sm font-semibold text-int-gray-main mr-2 mb-1'>
           {allowed_age}
         </span>
       </div>
