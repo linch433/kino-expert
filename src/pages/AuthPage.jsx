@@ -31,7 +31,8 @@ const AuthPage = () => {
             Sign Up
           </h2>
         </nav>
-        {isLoginView === 'login' ? <LoginForm /> : <RegistrationForm />}
+        {isLoginView === 'login' ? <LoginForm /> :
+          <RegistrationForm isLoginView={isLoginView} setIsLoginView={setIsLoginView} />}
       </div>
     </div>
   );
