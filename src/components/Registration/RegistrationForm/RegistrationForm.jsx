@@ -3,8 +3,9 @@ import { AuthButton } from '../../lib/AuthComponents';
 import { CustomField } from '../../../styles/CustomField';
 import * as Yup from 'yup';
 import { authAPI } from '../../../api/authApi';
+import { toast } from 'react-toastify';
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ isLoginView, setIsLoginView }) => {
   const genresOptions = [
     { label: 'Comedy', value: 'comedy' },
     { label: 'Horror', value: 'horror' },
@@ -27,10 +28,10 @@ const RegistrationForm = () => {
       validationSchema={Yup.object({
         email: Yup.string().email('Invalid email address').required('Required'),
         password: Yup.string()
-          .min(8, 'Must be 8 characters or less')
+          .min(8, 'Must be 8 characters or over')
           .required('Required'),
         name: Yup.string()
-          .max(10, 'Must be 15 characters or less')
+          .max(15, 'Must be 15 characters or less')
           .required('Required'),
       })}
       onSubmit={async values => {
@@ -39,7 +40,10 @@ const RegistrationForm = () => {
           values.password,
           values.name,
           values.favorite_genre,
-        );
+        ).then((res) => {
+          toast.success('You have successfully registered an account');
+          setIsLoginView('login');
+        });
       }}
     >
       <Form className='flex flex-col'>

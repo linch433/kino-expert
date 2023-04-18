@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Formik, Form } from 'formik';
+import { toast } from 'react-toastify';
 import { AuthButton } from '../../lib/AuthComponents';
 import { CustomField } from '../../../styles/CustomField';
 import * as Yup from 'yup';
@@ -29,6 +30,7 @@ const LoginForm = () => {
         authAPI
           .loginWithEmail(values.email, values.password)
           .then((res) => {
+            toast.success('Welcome back!');
             setAuth(true);
             navigate('/');
           })
