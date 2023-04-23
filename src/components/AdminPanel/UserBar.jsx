@@ -1,13 +1,21 @@
 import React from 'react';
 import UserAvatar from '../../styles/UserAvatar/UserAvatar';
+import { StringServices } from '../../app/features';
 
-const UserBar = ({ username, id }) => {
+const UserBar = ({ user, id }) => {
 
-  if (username) {
+  const { displayName, email, favorite_genre } = user;
+
+  if (user.displayName) {
     return (
-      <div className='flex items-center gap-2 my-6'>
-        <UserAvatar userName={`${username}-${id}`} />
-        <span>{username}</span>
+      <div className='flex p-2 gap-4 items-center mb-4 bg-int-gray-secondary rounded-xl text-int-white-main'>
+        <UserAvatar userName={`${displayName}-${id}`} />
+        <div className='text-sm'>
+          <div>Username: {displayName}</div>
+          <div>Email: {email}</div>
+          <div>Favorite genre: {(favorite_genre === '') ? '-' : StringServices.getCapitalizeWord(favorite_genre)}
+          </div>
+        </div>
       </div>
     );
   }

@@ -26,15 +26,15 @@ const AdminPanelPage = () => {
 
   if (isLoading) return <PagePreLoader />;
 
-  // console.log(users);
-
   return (
-    <>
-      <div className='text-2xl'>Users</div>
-      {users?.map((user, id) => (
-        <UserBar key={id} username={user.displayName} id={id} />
-      ))}
-    </>
+    <div className='m-4'>
+      <div className='text-3xl text-int-white-main mb-4'>List of users</div>
+      <div className='grid md:grid-cols-2 md:gap-2 xl:grid-cols-3 2xl:grid-cols-4'>
+        {users?.map((user, id) => (
+          <UserBar key={id} user={user} id={id} />
+        ))}
+      </div>
+    </div>
   );
 };
 

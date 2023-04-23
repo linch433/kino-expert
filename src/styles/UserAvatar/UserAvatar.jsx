@@ -6,7 +6,7 @@ const UserAvatar = ({ userName }) => {
   const bgColor = useMemo(() => `#${colorGenerator(userName)}`, [userName]);
 
   return (
-    <div className='flex justify-center items-center w-12 h-12 rounded-3xl'
+    <div className='flex justify-center items-center w-[48px] h-[48px] rounded-3xl text-int-white-main'
          style={{ backgroundColor: `${bgColor}` }}>{userNameFirstLetter}</div>
   );
 };
