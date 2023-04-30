@@ -1,36 +1,25 @@
-import { useEffect, useState, useMemo } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { firestore } from '../firebaseConfig';
+import { useEffect, useMemo, useState } from 'react';
 import { PagePreLoader } from '../styles/PreLoader/PreLoader';
 
 import ContentSearchRadioButton from '../styles/ContentSearchRadioButton';
 import ContentSearchBar from '../styles/ContentSearchBar';
 import ContentCard from '../components/Content/ContentCard/ContentCard';
+import { useFilms } from '../store/hooks/useFilms';
+import { fetchFilms } from '../components/util/fetchFilms';
 
 const ContentPage = () => {
-  const [films, setFilms] = useState();
+  const { films, setFilms } = useFilms();
+
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterOption, setFilterOption] = useState('name');
 
-  const fetchFilms = async () => {
-    setIsLoading(true);
-    await getDocs(collection(firestore, 'Films')).then(querySnapshot => {
-      const newData = querySnapshot.docs.map(doc => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setFilms(newData);
-    });
-    setIsLoading(false);
-  };
-
   useEffect(() => {
-    fetchFilms();
+    fetchFilms(setIsLoading, setFilms);
   }, []);
 
   const filteredFilms = useMemo(() => {
-    return films?.filter(film => {
+    return films?.filter((film) => {
       if (filterOption === 'name') {
         return film.name.toLowerCase().includes(searchQuery.toLowerCase());
       } else if (filterOption === 'genre') {
@@ -44,18 +33,18 @@ const ContentPage = () => {
 
   return (
     <>
-      <div className='flex items-center flex-col justify-center gap-1 md:flex-row md:gap-3'>
+      <div className="flex items-center flex-col justify-center gap-1 md:flex-row md:gap-3">
         <ContentSearchBar
-          type='search'
-          placeholder='Search'
+          type="search"
+          placeholder="Search"
           value={searchQuery}
-          onChange={e => setSearchQuery(e.target.value)}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <div className='flex justify-center mb-6'>
-          <div className='mr-4'>
+        <div className="flex justify-center mb-6">
+          <div className="mr-4">
             <ContentSearchRadioButton
-              type='radio'
-              value='name'
+              type="radio"
+              value="name"
               checked={filterOption === 'name'}
               onChange={() => setFilterOption('name')}
             >
@@ -63,11 +52,11 @@ const ContentPage = () => {
             </ContentSearchRadioButton>
           </div>
           <ContentSearchRadioButton
-            type='radio'
-            value='genre'
+            type="radio"
+            value="genre"
             checked={filterOption === 'genre'}
             onChange={() => setFilterOption('genre')}
-            className='ml-3'
+            className="ml-3"
           >
             Genre
           </ContentSearchRadioButton>
@@ -80,7 +69,7 @@ const ContentPage = () => {
             : 'md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'
         }`}
       >
-        {filteredFilms?.map(film => (
+        {filteredFilms?.map((film) => (
           <ContentCard key={film.id} film={film} />
         ))}
       </div>

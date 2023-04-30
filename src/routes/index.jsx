@@ -5,6 +5,7 @@ import ContentPage from '../pages/ContentPage';
 import AboutPage from '../pages/AboutPage';
 import FilmPage from '../pages/FilmPage';
 import AdminPanelPage from '../pages/AdminPanelPage';
+import FavouritesPage from '../pages/FavouritesPage';
 
 const routes = [
   {
@@ -30,6 +31,10 @@ const routes = [
       {
         path: 'auth',
         element: <AuthPage />,
+      },
+      {
+        path: 'favourites',
+        element: <FavouritesPage />,
       },
       {
         path: 'adminPanel',
