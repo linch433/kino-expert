@@ -24,50 +24,53 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex h-[60px] items-center justify-between bg-int-gray-main text-int-white-main px-5 md:px-10 text-lg">
+      <div
+        className='flex h-[60px] items-center justify-between bg-int-gray-main text-int-white-main px-5 md:px-10 text-lg'>
         <Link to={'/'}>
-          <ReactLogo className="h-8 w-auto" />
+          <ReactLogo className='h-8 w-auto' />
         </Link>
-        <div className="hidden lg:flex items-center">
+        <div className='hidden lg:flex items-center'>
           {profileData?.displayName === 'admin' ? (
-            <MenuLink linkPath="/adminPanel" text="Admin Panel" />
+            <MenuLink linkPath='/adminPanel' text='Admin Panel' />
           ) : (
             <></>
           )}
-          <MenuLink linkPath="/" text="Films" />
-          <MenuLink linkPath="/about" text="About" />
-          {isAuth && <MenuLink linkPath="/favourites" text="Favourites" />}
+          <MenuLink linkPath='/' text='Films' />
+          <MenuLink linkPath='/about' text='About' />
+          {isAuth && <MenuLink linkPath='/favourites' text='Favorites' />}
 
           {isAuth ? (
-            <LogOutButton onClick={logoutUser} className="cursor-pointer">
+            <LogOutButton onClick={logoutUser} className='cursor-pointer'>
               Sign Out
             </LogOutButton>
           ) : (
-            <MenuLink linkPath="/auth" text="Sign In" />
+            <MenuLink linkPath='/auth' text='Sign In' />
           )}
         </div>
-        <div className="flex flex-col items-center lg:hidden">
+        <div className='flex flex-col items-center lg:hidden'>
           <CgMenu
-            className="cursor-pointer w-auto h-6"
+            className='cursor-pointer w-auto h-6'
             onClick={toggleMenu}
-            color="white"
+            color='white'
           />
         </div>
       </div>
 
       {isModalOpen && (
-        <div className="flex flex-col px-5 bg-int-gray-main text-int-white-main text-lg py-3 z-1 gap-3 border-2 lg:hidden">
+        <div
+          className='flex flex-col px-5 bg-int-gray-main text-int-white-main text-lg py-3 z-1 gap-3 border-2 lg:hidden'>
           {profileData?.displayName === 'admin' && (
-            <MenuLink linkPath="/adminPanel" text="Admin Panel" />
+            <MenuLink linkPath='/adminPanel' text='Admin Panel' />
           )}
-          <MenuLink linkPath="/" text="Films" />
-          <MenuLink linkPath="/about" text="About" />
+          <MenuLink linkPath='/' text='Films' />
+          <MenuLink linkPath='/about' text='About' />
+          {isAuth && <MenuLink linkPath='/favourites' text='Favorites' />}
           {isAuth ? (
-            <LogOutButton onClick={logoutUser} className="cursor-pointer">
+            <LogOutButton onClick={logoutUser} className='cursor-pointer'>
               Sign Out
             </LogOutButton>
           ) : (
-            <MenuLink linkPath="/auth" text="Sign In" />
+            <MenuLink linkPath='/auth' text='Sign In' />
           )}
         </div>
       )}
