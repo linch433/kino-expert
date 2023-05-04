@@ -77,7 +77,7 @@ const FilmCard = ({ currentFilm }) => {
         >
           Watch trailer
         </Link>
-        <div className='mt-2 items-center hidden justify-center w-full xl:flex h-[29.5rem]'>
+        <div className='mt-2 items-center hidden justify-center w-full lg:flex h-[29.5rem]'>
           <iframe
             src={embedUrl}
             className='w-full h-full'
