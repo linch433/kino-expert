@@ -1,3 +1,29 @@
+import firstImage from '../assets/image1.png';
+import secondImage from '../assets/image2.avif';
+import thirdImage from '../assets/image3.png';
+import ProfileView from '../styles/ProfileView';
+
+const devProfiles = [
+  {
+    image: firstImage,
+    devName: 'Kashuba Ivan',
+    devInfo: 'Frontend, Backend',
+    livingPlace: 'Chop, UA',
+  },
+  {
+    image: secondImage,
+    devName: 'Volodymyr Kopynets',
+    devInfo: 'Frontend, Backend',
+    livingPlace: 'Uzhhorod, UA',
+  },
+  {
+    image: thirdImage,
+    devName: 'Voloshyn Roman',
+    devInfo: 'Android, Backend',
+    livingPlace: 'Khust, UA',
+  },
+];
+
 const AboutPage = () => {
   return (
     <div className='text-int-white-main flex flex-col gap-4 px-10 text-[18px]'>
@@ -51,6 +77,12 @@ const AboutPage = () => {
         Join us today at <span className='font-bold'>KINO-EXPERT</span> and become a part of our thriving community of
         movie lovers. We can't wait
         to hear what you think, and together, we'll embark on a cinematic journey like no other. Happy watching!
+      </div>
+      <div className='text-4xl font-semibold text-center'>Developer Team</div>
+      <div className='flex flex-row flex-wrap justify-center gap-10 text-center mb-5'>
+        {devProfiles.map((item, index) => (
+          <ProfileView key={index} src={item} />
+        ))}
       </div>
     </div>
   );
